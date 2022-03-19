@@ -36,11 +36,7 @@ var hillSlope = (distance) => {
 // routine calculates work done by gravity and air drag over each interval
 for (var i = 0; i < hillData.length - 1; i++) {
   var addKE =
-    ((hillSlope(i) + hillSlope(i + 1)) *
-      gravity *
-      distanceInterval *
-      totalMass) /
-    2; // adds to kinetic energy according to conservation of energy and loss of GPE
+    ((hillSlope(i) + hillSlope(i + 1)) * gravity * distanceInterval * totalMass) / 2; // adds to kinetic energy according to conservation of energy and loss of GPE
   var dragLoss = 0.5 * dragCD * 5 * rho * velocity ** 2; // substracts from kinetic energy according to conservation of energy and work done against drag
   // force of drag = 0.5 * Cd * A * Rho * velocity^2
   var rollingLoss = rollingResistance * distanceInterval;
