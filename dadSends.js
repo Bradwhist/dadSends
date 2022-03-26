@@ -27,8 +27,8 @@ var dragCD = 1.1; // estimated drag coefficient of scooter rider
 var frontalArea = 0.3; // estimated frontal area of bruce riding scooter in square meters (45 inches tall)
 var rho = 1.225; // atmospheric pressure in kg/m^3
 
-var velocity = 1; // initial velocity
-var kineticE = 17; // initial kinetic energy
+var velocity = 1; // initial velocity (m/s)
+var kineticE = 17; // initial kinetic energy (J)
 var velocityLog = [1]; // sequence of velocity after each interval (m/s)
 var velocityReportLog = [1]; // sequence of velocity after each segment (m/s)
 var time = 0; // total time elapsed (s)
@@ -84,7 +84,7 @@ for (var i = 0; i < hillData.length - 1; i++) {
   timeReportLog.push(time); // pushes time at end of each segment to reported time log
 }
 
-////////////////////////////////////
+//////////////////////////////////////
 // Report results:
 var report = (n) => {
   // function reports distance covered, velocity, and time as function of % of descent completed
