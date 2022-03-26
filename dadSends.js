@@ -21,14 +21,15 @@ var scooterMass = 11; // scooter mass in kg (25 lbs estimated)
 var rollingResistance = 0.8133; // rolling resistance in N
 var totalMass = bruceMass + scooterMass; // total mass of rider and machine
 var gravity = 9.81; // engineers say its 10
-var velocityLog = [0]; // sequence of velocity after each interval
-var velocityReportLog = []; // sequence of velocity after each segment
+
 var dragCD = 1.1; // estimated drag coefficient of scooter rider
 var frontalArea = 0.3; // estimated frontal area of bruce riding scooter in square meters (45 inches tall)
 var rho = 1.225; // atmospheric pressure
 
 var velocity = 0; // initial velocity
 var kineticE = 0; // initial kinetic energy
+var velocityLog = [0]; // sequence of velocity after each interval
+var velocityReportLog = []; // sequence of velocity after each segment
 var time = 0; // total time elapsed
 var timeLog = []; // sequence of time after each interval
 var timeReportLog = []; // sequence of time after each segment
