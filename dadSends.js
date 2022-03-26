@@ -13,6 +13,8 @@ var hillData = [
   0.077,
   0.054
 ]; // slopes of hill from strava at 10% intervals of overall route
+
+// Constants and assumed values
 var distanceInterval = 14.83262508568872; // horizontal distance between each interval
 var velocity = 0; // initial velocity
 var kineticE = 0; // initial kinetic energy
@@ -21,12 +23,15 @@ var scooterMass = 11; // scooter mass in kg (25 lbs estimated)
 var rollingResistance = 0.8133; // rolling resistance in N
 var totalMass = bruceMass + scooterMass; // total mass of rider and machine
 var gravity = 9.81; // engineers say its 10
-var velocityLog = []; // returned array of velocity at each segment
+var velocityLog = [0]; // returned array of velocity at each segment
+var velocityReportLog = [];
 var dragCD = 1.1; // estimated drag coefficient of scooter rider
 var frontalArea = 0.3; // estimated frontal area of bruce riding scooter in square meters (45 inches tall)
 var rho = 1.225; // atmospheric pressure at STP
 var time = 0;
 var timeLog = [];
+var timeReportLog = [];
+var intervals = 10 ** 6;
 
 // function that returns slope at input interval #
 var hillSlope = (distance) => {
@@ -35,20 +40,52 @@ var hillSlope = (distance) => {
 
 // routine calculates work done by gravity and air drag over each interval
 for (var i = 0; i < hillData.length - 1; i++) {
-  var addKE =
-    ((hillSlope(i) + hillSlope(i + 1)) * gravity * distanceInterval * totalMass) / 2; // adds to kinetic energy according to conservation of energy and loss of GPE
-  var dragLoss = 0.5 * dragCD * 5 * rho * velocity ** 2; // substracts from kinetic energy according to conservation of energy and work done against drag
-  // force of drag = 0.5 * Cd * A * Rho * velocity^2
-  var rollingLoss = rollingResistance * distanceInterval;
-  kineticE += addKE;
-  kineticE -= dragLoss;
-  kineticE -= rollingLoss;
-  velocity = Math.sqrt((2 * kineticE) / totalMass); // calculates current velocity from kinetic energy
-  velocityLog.push(velocity); // adds current velocity to return array
-  time += distanceInterval / velocity;
-  timeLog.push(time);
+  // routine runs for each segment using known hill gradients
+  for (var j = 0; j < intervals; j++) {
+    // subroutine calculates 10 ** 6 intervals for each segment
+
+    // accumulates kinetic energy from loss in GPE and conservation of energy
+    var addKE =
+      ((hillSlope(i) + (hillSlope(i + 1) - hillSlope(i)) * (j / intervals)) *
+        gravity *
+        distanceInterval *
+        totalMass) /
+      intervals;
+
+    // decrements from kinetic energy according to conservation of energy and work done against drag
+    var dragLoss =
+      (distanceInterval / intervals) *
+      0.5 *
+      dragCD *
+      frontalArea *
+      rho *
+      velocity ** 2;
+    // force of drag = 0.5 * Cd * A * Rho * velocity^2
+
+    // decrements from kinetic energy according to conservation of energy and work done against rolling resistance
+    var rollingLoss = (rollingResistance * distanceInterval) / intervals;
+
+    // sums net energy gained
+    kineticE += addKE;
+    kineticE -= dragLoss;
+    kineticE -= rollingLoss;
+
+    velocity = Math.sqrt((2 * kineticE) / totalMass); // calculates current velocity from kinetic energy
+    velocityLog.push(velocity); // stores current velocity to sequence
+
+    time += // accumulates time from length of interval and average of initial and final velocity for interval
+      (2 * distanceInterval) /
+      intervals /
+      (velocityLog[i * intervals + j] + velocityLog[i * intervals + j + 1]);
+    timeLog.push(time); // stores current time to sequence
+  }
+
+  velocityReportLog.push(velocity); // pushes velocity at end of each segment to reported velocity log
+  timeReportLog.push(time); // pushes time at end of each segment to reported time log
 }
 
-console.log(velocityLog); // returns array of velocity over distance
-console.log(time);
-console.log(timeLog);
+/////////////////////////////////////////////////////////////////////////////////
+// Reported Values:
+console.log(velocityReportLog); // velocity at each 10% segment of hill
+console.log(timeReportLog); // time at each 10% segment of hill
+console.log(time); // total time
