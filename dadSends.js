@@ -23,20 +23,15 @@ var scooterMass = 11; // scooter mass in kg (25 lbs estimated)
 var rollingResistance = 0.8133; // rolling resistance in N
 var totalMass = bruceMass + scooterMass; // total mass of rider and machine
 var gravity = 9.81; // engineers say its 10
-var velocityLog = [0]; // returned array of velocity at each segment
-var velocityReportLog = [];
+var velocityLog = [0]; // sequence of velocity after each interval
+var velocityReportLog = []; // sequence of velocity after each segment
 var dragCD = 1.1; // estimated drag coefficient of scooter rider
 var frontalArea = 0.3; // estimated frontal area of bruce riding scooter in square meters (45 inches tall)
 var rho = 1.225; // atmospheric pressure at STP
-var time = 0;
-var timeLog = [];
-var timeReportLog = [];
-var intervals = 10 ** 6;
-
-// function that returns slope at input interval #
-var hillSlope = (distance) => {
-  return hillData[distance];
-};
+var time = 0; // total time elapsed
+var timeLog = []; // sequence of time after each interval
+var timeReportLog = []; // sequence of time after each segment
+var intervals = 10 ** 6; // # intervals per segment
 
 // routine calculates work done by gravity and air drag over each interval
 for (var i = 0; i < hillData.length - 1; i++) {
@@ -46,7 +41,7 @@ for (var i = 0; i < hillData.length - 1; i++) {
 
     // accumulates kinetic energy from loss in GPE and conservation of energy
     var addKE =
-      ((hillSlope(i) + (hillSlope(i + 1) - hillSlope(i)) * (j / intervals)) *
+      ((hillData[i] + (hillData[i + 1] - hillData[i]) * (j / intervals)) *
         gravity *
         distanceInterval *
         totalMass) /
