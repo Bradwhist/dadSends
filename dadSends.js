@@ -26,10 +26,10 @@ var dragCD = 1.1; // estimated drag coefficient of scooter rider
 var frontalArea = 0.3; // estimated frontal area of bruce riding scooter in square meters (45 inches tall)
 var rho = 1.225; // atmospheric pressure in kg/m^3
 
-var velocity = 0; // initial velocity
-var kineticE = 0; // initial kinetic energy
-var velocityLog = [0]; // sequence of velocity after each interval (m/s)
-var velocityReportLog = [0]; // sequence of velocity after each segment (m/s)
+var velocity = 1; // initial velocity
+var kineticE = 17; // initial kinetic energy
+var velocityLog = [1]; // sequence of velocity after each interval (m/s)
+var velocityReportLog = [1]; // sequence of velocity after each segment (m/s)
 var time = 0; // total time elapsed (s)
 var timeLog = [0]; // sequence of time after each interval (s)
 var timeReportLog = [0]; // sequence of time after each segment (s)
