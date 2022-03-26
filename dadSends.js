@@ -85,7 +85,7 @@ for (var i = 0; i < hillData.length - 1; i++) {
 }
 
 /////////////////////////////////////////////////////////////////////////////////
-// Report result:
+// Report results:
 var report = (n) => {
   // function reports distance covered, velocity, and time as function of % of descent completed
   console.log(
@@ -103,7 +103,7 @@ var report = (n) => {
       " s"
   );
 };
-// Report Values:
+// Calls function for each segment
 for (var i = 0; i < velocityReportLog.length; i++) {
   report(i);
 }
