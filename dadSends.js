@@ -26,13 +26,13 @@ var dragCD = 1.1; // estimated drag coefficient of scooter rider
 var frontalArea = 0.3; // estimated frontal area of bruce riding scooter in square meters (45 inches tall)
 var rho = 1.225; // atmospheric pressure in kg/m^3
 
-var velocity = 0; // initial velocity 
+var velocity = 0; // initial velocity
 var kineticE = 0; // initial kinetic energy
 var velocityLog = [0]; // sequence of velocity after each interval (m/s)
-var velocityReportLog = []; // sequence of velocity after each segment (m/s)
+var velocityReportLog = [0]; // sequence of velocity after each segment (m/s)
 var time = 0; // total time elapsed (s)
-var timeLog = []; // sequence of time after each interval (s)
-var timeReportLog = []; // sequence of time after each segment (s)
+var timeLog = [0]; // sequence of time after each interval (s)
+var timeReportLog = [0]; // sequence of time after each segment (s)
 
 var intervals = 10 ** 6; // # intervals per segment
 
@@ -83,7 +83,24 @@ for (var i = 0; i < hillData.length - 1; i++) {
 }
 
 /////////////////////////////////////////////////////////////////////////////////
-// Reported Values:
-console.log(velocityReportLog); // velocity at each 10% segment of hill
-console.log(timeReportLog); // time at each 10% segment of hill
-console.log(time); // total time
+var report = (n) => {
+  // function reports distance covered, velocity, and time as function of % of descent completed
+  console.log(
+    "% of total run: " +
+      n +
+      "0     " +
+      "distance covered: " +
+      distanceInterval * n +
+      " m     " +
+      "velocity: " +
+      velocityReportLog[n] +
+      " m/s     " +
+      "time elapsed: " +
+      timeReportLog[n] +
+      " s"
+  );
+};
+// Report Values:
+for (var i = 0; i < velocityReportLog.length; i++) {
+  report(i);
+}
