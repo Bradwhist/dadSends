@@ -1,5 +1,6 @@
 //  Simulation of Bruce's speed and time descending Eagle's Nest Road
 
+// Constants and assumed values
 var hillData = [
   0.114,
   0.141,
@@ -13,11 +14,8 @@ var hillData = [
   0.077,
   0.054
 ]; // slopes of hill from strava at 10% intervals of overall route
-
-// Constants and assumed values
 var distanceInterval = 14.83262508568872; // horizontal distance between each interval
-var velocity = 0; // initial velocity
-var kineticE = 0; // initial kinetic energy
+
 var bruceMass = 23; // bruce's mass in kg (50 lbs estimated)
 var scooterMass = 11; // scooter mass in kg (25 lbs estimated)
 var rollingResistance = 0.8133; // rolling resistance in N
@@ -28,9 +26,13 @@ var velocityReportLog = []; // sequence of velocity after each segment
 var dragCD = 1.1; // estimated drag coefficient of scooter rider
 var frontalArea = 0.3; // estimated frontal area of bruce riding scooter in square meters (45 inches tall)
 var rho = 1.225; // atmospheric pressure
+
+var velocity = 0; // initial velocity
+var kineticE = 0; // initial kinetic energy
 var time = 0; // total time elapsed
 var timeLog = []; // sequence of time after each interval
 var timeReportLog = []; // sequence of time after each segment
+
 var intervals = 10 ** 6; // # intervals per segment
 
 // routine calculates work done by gravity and air drag over each interval
