@@ -14,25 +14,25 @@ var hillData = [
   0.077,
   0.054
 ]; // slopes of hill from strava at 10% intervals of overall route
-var distanceInterval = 14.83262508568872; // horizontal distance between each interval
+var distanceInterval = 14.83262508568872; // horizontal distance between each interval (m)
 
 var bruceMass = 23; // bruce's mass in kg (50 lbs estimated)
 var scooterMass = 11; // scooter mass in kg (25 lbs estimated)
 var rollingResistance = 0.8133; // rolling resistance in N
-var totalMass = bruceMass + scooterMass; // total mass of rider and machine
-var gravity = 9.81; // engineers say its 10
+var totalMass = bruceMass + scooterMass; // total mass of rider and machine in kg
+var gravity = 9.81; // engineers say its 10  (m/s^2)
 
 var dragCD = 1.1; // estimated drag coefficient of scooter rider
 var frontalArea = 0.3; // estimated frontal area of bruce riding scooter in square meters (45 inches tall)
-var rho = 1.225; // atmospheric pressure
+var rho = 1.225; // atmospheric pressure in kg/m^3
 
-var velocity = 0; // initial velocity
+var velocity = 0; // initial velocity 
 var kineticE = 0; // initial kinetic energy
-var velocityLog = [0]; // sequence of velocity after each interval
-var velocityReportLog = []; // sequence of velocity after each segment
-var time = 0; // total time elapsed
-var timeLog = []; // sequence of time after each interval
-var timeReportLog = []; // sequence of time after each segment
+var velocityLog = [0]; // sequence of velocity after each interval (m/s)
+var velocityReportLog = []; // sequence of velocity after each segment (m/s)
+var time = 0; // total time elapsed (s)
+var timeLog = []; // sequence of time after each interval (s)
+var timeReportLog = []; // sequence of time after each segment (s)
 
 var intervals = 10 ** 6; // # intervals per segment
 
