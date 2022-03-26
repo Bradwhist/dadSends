@@ -1,5 +1,6 @@
 //  Simulation of Bruce's speed and time descending Eagle's Nest Road
 
+/////////////////////////////////
 // Constants and assumed values
 var hillData = [
   0.114,
@@ -36,6 +37,7 @@ var timeReportLog = [0]; // sequence of time after each segment (s)
 
 var intervals = 10 ** 6; // # intervals per segment
 
+////////////////////////////////////
 // routine calculates work done by gravity and air drag over each interval
 for (var i = 0; i < hillData.length - 1; i++) {
   // routine runs for each segment using known hill gradients
@@ -83,6 +85,7 @@ for (var i = 0; i < hillData.length - 1; i++) {
 }
 
 /////////////////////////////////////////////////////////////////////////////////
+// Report result:
 var report = (n) => {
   // function reports distance covered, velocity, and time as function of % of descent completed
   console.log(
