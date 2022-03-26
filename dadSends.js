@@ -84,7 +84,7 @@ for (var i = 0; i < hillData.length - 1; i++) {
   timeReportLog.push(time); // pushes time at end of each segment to reported time log
 }
 
-/////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////
 // Report results:
 var report = (n) => {
   // function reports distance covered, velocity, and time as function of % of descent completed
